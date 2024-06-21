@@ -9,52 +9,52 @@ importers:
   .:
     devDependencies:
       '@headlessui/react':
-        specifier: ^2.0.0
+        specifier: ^2.1.0
         version: 2.1.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@inertiajs/react':
-        specifier: ^1.0.0
+        specifier: ^1.2.0
         version: 1.2.0(react@18.3.1)
       '@tailwindcss/forms':
-        specifier: ^0.5.3
+        specifier: ^0.5.7
         version: 0.5.7(tailwindcss@3.4.4)
       '@types/node':
-        specifier: ^18.13.0
+        specifier: ^18.19.38
         version: 18.19.38
       '@types/react':
-        specifier: ^18.0.28
+        specifier: ^18.3.3
         version: 18.3.3
       '@types/react-dom':
-        specifier: ^18.0.10
+        specifier: ^18.3.0
         version: 18.3.0
       '@vitejs/plugin-react':
-        specifier: ^4.2.0
+        specifier: ^4.3.1
         version: 4.3.1(vite@5.3.1(@types/node@18.19.38))
       autoprefixer:
-        specifier: ^10.4.12
+        specifier: ^10.4.19
         version: 10.4.19(postcss@8.4.38)
       axios:
-        specifier: ^1.6.4
+        specifier: ^1.7.2
         version: 1.7.2
       laravel-vite-plugin:
-        specifier: ^1.0
+        specifier: ^1.0.4
         version: 1.0.4(vite@5.3.1(@types/node@18.19.38))
       postcss:
-        specifier: ^8.4.31
+        specifier: ^8.4.38
         version: 8.4.38
       react:
-        specifier: ^18.2.0
+        specifier: ^18.3.1
         version: 18.3.1
       react-dom:
-        specifier: ^18.2.0
+        specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
       tailwindcss:
-        specifier: ^3.2.1
+        specifier: ^3.4.4
         version: 3.4.4
       typescript:
-        specifier: ^5.0.2
+        specifier: ^5.5.2
         version: 5.5.2
       vite:
-        specifier: ^5.0
+        specifier: ^5.3.1
         version: 5.3.1(@types/node@18.19.38)
 
 packages:
