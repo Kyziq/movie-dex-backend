@@ -14,9 +14,6 @@ return new class extends Migration
         Schema::dropIfExists('failed_jobs');
         Schema::dropIfExists('jobs');
         Schema::dropIfExists('job_batches');
-        Schema::dropIfExists('cache');
-        Schema::dropIfExists('cache_locks');
-        
     }
 
     /**
@@ -56,18 +53,5 @@ return new class extends Migration
             $table->longText('exception');
             $table->timestamp('failed_at')->useCurrent();
         });
-
-        Schema::create('cache', function (Blueprint $table) {
-            $table->string('key')->primary();
-            $table->mediumText('value');
-            $table->integer('expiration');
-        });
-
-        Schema::create('cache_locks', function (Blueprint $table) {
-            $table->string('key')->primary();
-            $table->string('owner');
-            $table->integer('expiration');
-        });
-
     }
 };
