@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TMDBController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -30,5 +32,11 @@ Route::get('/movies', [MovieController::class, 'index']);
 Route::post('/movie', [MovieController::class, 'store']);
 Route::patch('/movie/{movie}', [MovieController::class, 'update']);
 Route::delete('/movie/{movie}', [MovieController::class, 'destroy']);
+
+//Reviews
+Route::get('/reviews', [ReviewController::class, 'index']);
+Route::post('/review', [ReviewController::class, 'store']);
+Route::patch('/review/{review}', [ReviewController::class, 'update']);
+Route::delete('/review/{review}', [ReviewController::class, 'destroy']);
 
 require __DIR__ . '/auth.php';
