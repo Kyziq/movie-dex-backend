@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MovieRequest;
 use App\Models\Movie;
+use Inertia\Inertia;
 
 class MovieController extends Controller
 {
     public function index()
     {
-        return Movie::get();
+       $movies = Movie::all();
+        return response()->json($movies);
     }
 
     public function store(MovieRequest $request)
@@ -28,5 +30,10 @@ class MovieController extends Controller
     {
         $movie->delete();
         return response()->json(null, 204);
+    }
+
+    public function show(Movie $movie)
+    {
+        return Inertia::render('MovieDetail', ['movie' => $movie]);
     }
 }

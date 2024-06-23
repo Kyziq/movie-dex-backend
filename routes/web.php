@@ -29,9 +29,11 @@ Route::middleware('auth')->group(function () {
 
 // Movies
 Route::get('/movies', [MovieController::class, 'index']);
+Route::get('/movies/{movie}', [MovieController::class, 'show'])->name('movies.show');
 Route::post('/movie', [MovieController::class, 'store']);
 Route::patch('/movie/{movie}', [MovieController::class, 'update']);
 Route::delete('/movie/{movie}', [MovieController::class, 'destroy']);
+
 
 //Reviews
 Route::get('/reviews', [ReviewController::class, 'index']);
