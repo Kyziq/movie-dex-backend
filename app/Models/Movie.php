@@ -17,4 +17,8 @@ class Movie extends Model
     {
         return $this->hasMany(Review::class);
     }
+     public function favourites()
+    {
+        return $this->hasMany(Favourite::class);
+    }
 }
