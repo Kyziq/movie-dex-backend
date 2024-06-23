@@ -14,8 +14,8 @@ export default function Authenticated({
 	const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false)
 
 	return (
-		<div className='min-h-screen bg-gray-100 dark:bg-gray-900'>
-			<nav className='border-b border-gray-100 bg-white dark:border-gray-700 dark:bg-gray-800'>
+		<div className='min-h-screen bg-gray-100 bg-gray-800'>
+			<nav className='border-b border-gray-100 bg-white dark:border-gray-700 dark:bg-gray-900'>
 				<div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
 					<div className='flex h-16 justify-between'>
 						<div className='flex'>
@@ -27,7 +27,7 @@ export default function Authenticated({
 
 							<div className='hidden space-x-8 sm:-my-px sm:ms-10 sm:flex'>
 								<NavLink href={route('dashboard')} active={route().current('dashboard')}>
-									Dashboard
+									Movie
 								</NavLink>
 							</div>
 						</div>

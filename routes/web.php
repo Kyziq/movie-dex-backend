@@ -29,14 +29,15 @@ Route::middleware('auth')->group(function () {
 
 // Movies
 Route::get('/movies', [MovieController::class, 'index']);
-Route::post('/movie', [MovieController::class, 'store']);
-Route::patch('/movie/{movie}', [MovieController::class, 'update']);
-Route::delete('/movie/{movie}', [MovieController::class, 'destroy']);
+Route::get('/movies/{movie}', [MovieController::class, 'show'])->name('movies.show');
+Route::post('/movies', [MovieController::class, 'store']);
+Route::patch('/movies/{movie}', [MovieController::class, 'update']);
+Route::delete('/movies/{movie}', [MovieController::class, 'destroy']);
 
 //Reviews
 Route::get('/reviews', [ReviewController::class, 'index']);
-Route::post('/review', [ReviewController::class, 'store']);
-Route::patch('/review/{review}', [ReviewController::class, 'update']);
-Route::delete('/review/{review}', [ReviewController::class, 'destroy']);
+Route::post('/reviews', [ReviewController::class, 'store']);
+Route::patch('/reviews/{review}', [ReviewController::class, 'update']);
+Route::delete('/reviews/{review}', [ReviewController::class, 'destroy']);
 
 require __DIR__ . '/auth.php';
