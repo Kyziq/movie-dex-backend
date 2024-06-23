@@ -14,8 +14,8 @@ export default function Authenticated({
 	const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false)
 
 	return (
-		<div className='min-h-screen bg-gray-100 bg-gray-800'>
-			<nav className='border-b border-gray-100 bg-white dark:border-gray-700 dark:bg-gray-900'>
+		<div className='min-h-screen bg-gray-100 bg-gray-950'>
+			<nav className='border-b border-gray-100 bg-white dark:border-gray-700 dark:bg-red-800'>
 				<div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
 					<div className='flex h-16 justify-between'>
 						<div className='flex'>
@@ -32,6 +32,21 @@ export default function Authenticated({
 							</div>
 						</div>
 
+						<div className='flex flex-col items-center md:flex-row'>
+							<div className='relative mt-3 md:mt-0'>
+								<input
+									type='text'
+									className='focus:shadow-outline w-64 rounded-full bg-slate-200 px-4 py-1 pl-8 text-sm focus:outline-none dark:border-gray-700'
+									placeholder='Search'
+								/>
+								<div className='absolute top-0'>
+									<svg className='ml-2 mt-2 w-4 fill-current text-gray-500' viewBox='0 0 24 24'>
+										<path d='M16.32 14.9l5.39 5.4a1 1 0 01-1.42 1.4l-5.38-5.38a8 8 0 111.41-1.41zM10 16a6 6 0 100-12 6 6 0 000 12z'></path>
+									</svg>
+								</div>
+							</div>
+						</div>
+
 						<div className='hidden sm:ms-6 sm:flex sm:items-center'>
 							<div className='relative ms-3'>
 								<Dropdown>
@@ -39,7 +54,7 @@ export default function Authenticated({
 										<span className='inline-flex rounded-md'>
 											<button
 												type='button'
-												className='inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none dark:bg-gray-800 dark:text-gray-400 dark:hover:text-gray-300'>
+												className='inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none dark:bg-gray-950 dark:text-gray-400 dark:hover:text-gray-300'>
 												{user.name}
 
 												<svg

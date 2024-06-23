@@ -36,4 +36,16 @@ class MovieController extends Controller
     {
         return Inertia::render('MovieDetail', ['movie' => $movie]);
     }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        $movies = Movie::where('title', 'like', '%' . $query . '%')
+                        ->orWhere('description', 'like', '%' . $query . '%')
+                        ->get();
+
+        return response()->json($movies);
+    }
+
 }

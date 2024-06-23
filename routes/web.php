@@ -25,6 +25,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/reviews', [ReviewController::class, 'index']);
+    Route::post('/reviews', [ReviewController::class, 'store']);
+    Route::patch('/reviews/{review}', [ReviewController::class, 'update']);
+    Route::delete('/reviews/{review}', [ReviewController::class, 'destroy']);
 });
 
 // Movies
@@ -33,11 +37,11 @@ Route::get('/movies/{movie}', [MovieController::class, 'show'])->name('movies.sh
 Route::post('/movies', [MovieController::class, 'store']);
 Route::patch('/movies/{movie}', [MovieController::class, 'update']);
 Route::delete('/movies/{movie}', [MovieController::class, 'destroy']);
+Route::get('/movies/search', [MovieController::class, 'search'])->name('movies.search');
 
 //Reviews
-Route::get('/reviews', [ReviewController::class, 'index']);
-Route::post('/reviews', [ReviewController::class, 'store']);
-Route::patch('/reviews/{review}', [ReviewController::class, 'update']);
-Route::delete('/reviews/{review}', [ReviewController::class, 'destroy']);
+
+
+
 
 require __DIR__ . '/auth.php';

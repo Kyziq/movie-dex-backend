@@ -1,15 +1,15 @@
 {
 	"compilerOptions": {
 		"allowJs": true,
-		"module": "ESNext",
-		"moduleResolution": "bundler",
-		"jsx": "react-jsx",
-		"strict": true,
-		"isolatedModules": true,
-		"target": "ESNext",
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
+		"isolatedModules": true,
+		"jsx": "react-jsx",
+		"module": "ESNext",
+		"moduleResolution": "node", // Changed to 'node'
 		"noEmit": true,
+		"strict": true,
+		"target": "ESNext",
 		"paths": {
 			"@/*": ["./resources/js/*"],
 			"ziggy-js": ["./vendor/tightenco/ziggy"]

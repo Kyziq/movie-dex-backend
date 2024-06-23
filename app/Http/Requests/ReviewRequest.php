@@ -11,7 +11,7 @@ class ReviewRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,7 @@ class ReviewRequest extends FormRequest
         return [
             'user_id' => 'required|exists:users,id',
             'movie_id' => 'required|exists:movies,id',
-            'rating' => 'required|integer|min:1|max:10',
+            'rating' => 'integer|min:0|max:10',
             'comment' => 'nullable|string',
         ];
     }

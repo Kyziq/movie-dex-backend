@@ -11,9 +11,19 @@ class ReviewController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Review::with('user', ' movie')->get();
+        $query = Review::query();
+
+        // If there's a `movie_id` parameter, use it to filter reviews
+        if ($request->has('movie_id')) {
+            $query->where('movie_id', $request->movie_id);
+        }
+
+        // Eager load user and movie relationships and paginate results
+        $reviews = $query->with(['user', 'movie'])->paginate(5); // Set pagination to 5 items per page
+
+        return response()->json($reviews);
     }
 
     /**
@@ -21,7 +31,7 @@ class ReviewController extends Controller
      */
     public function store(ReviewRequest $request)
     {
-        $review->update($request->validated());
+        $review = Review::create($request->validated());
         return response ()->json($review, 201);
     }
 
