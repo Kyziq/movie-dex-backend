@@ -72,7 +72,7 @@ export default function Login({
 					<InputError message={errors.password} className='mt-2' />
 				</div>
 
-				<div className='mt-4 block'>
+				<div className='mt-4 flex items-center justify-between'>
 					<label className='flex items-center'>
 						<Checkbox
 							name='remember'
@@ -81,9 +81,7 @@ export default function Login({
 						/>
 						<span className='ms-2 text-sm text-gray-600 dark:text-gray-400'>Remember me</span>
 					</label>
-				</div>
 
-				<div className='mt-4 flex items-center justify-end'>
 					{canResetPassword && (
 						<Link
 							href={route('password.request')}
@@ -91,7 +89,16 @@ export default function Login({
 							Forgot your password?
 						</Link>
 					)}
+				</div>
 
+				<div className='mt-4 flex items-center justify-end'>
+					<div>
+						<Link
+							href={route('register')}
+							className='rounded-md text-sm text-blue-600 underline hover:text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:text-blue-400 dark:hover:text-blue-100 dark:focus:ring-offset-gray-800'>
+							Don't have an account? Register
+						</Link>
+					</div>
 					<PrimaryButton className='ms-4' disabled={processing}>
 						Log in
 					</PrimaryButton>
