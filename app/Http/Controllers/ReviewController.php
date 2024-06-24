@@ -8,6 +8,12 @@ use App\Models\Review;
 
 class ReviewController extends Controller
 {
+    public function __construct()
+    {
+        // Apply auth middleware only to methods that require authentication
+        $this->middleware('auth')->except(['index']);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -32,7 +38,7 @@ class ReviewController extends Controller
     public function store(ReviewRequest $request)
     {
         $review = Review::create($request->validated());
-        return response ()->json($review, 201);
+        return response()->json($review, 201);
     }
 
     /**

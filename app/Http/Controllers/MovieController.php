@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Http\Request;
 use App\Http\Requests\MovieRequest;
 use App\Models\Movie;
 use Inertia\Inertia;
@@ -39,13 +39,16 @@ class MovieController extends Controller
 
     public function search(Request $request)
     {
+        try {
         $query = $request->input('query');
-
         $movies = Movie::where('title', 'like', '%' . $query . '%')
                         ->orWhere('description', 'like', '%' . $query . '%')
                         ->get();
-
         return response()->json($movies);
-    }
+        } catch (\Exception $e) {
+            \Log::error("Error during search: " . $e->getMessage());
+            return response()->json(['error' => 'Server Error'], 500);
+        }
 
+    }
 }

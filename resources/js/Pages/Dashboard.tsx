@@ -1,9 +1,9 @@
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
-import { Head } from '@inertiajs/react'
-import { InertiaLink } from '@inertiajs/inertia-react'
-import { PageProps } from '@/types'
 import React, { useEffect, useState } from 'react'
+import { Head } from '@inertiajs/react'
 import axios from 'axios'
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
+import Guest from '@/Layouts/Guest'
+import { PageProps } from '@/types'
 import { Link } from '@inertiajs/react'
 
 interface Movie {
@@ -35,7 +35,7 @@ export default function Dashboard({ auth }: PageProps) {
 		fetchMovies()
 	}, [])
 
-	return (
+	return auth.user ? (
 		<AuthenticatedLayout user={auth.user}>
 			<Head title='Dashboard' />
 			<div className='container mx-auto px-4 pt-16'>
@@ -53,6 +53,24 @@ export default function Dashboard({ auth }: PageProps) {
 				</div>
 			</div>
 		</AuthenticatedLayout>
+	) : (
+		<Guest>
+			<Head title='Dashboard' />
+			<div className='container mx-auto px-4 pt-16'>
+				<div className='popular-movies'>
+					<h2 className='text-lg font-semibold uppercase tracking-wider text-orange-500'>
+						Top Pick Movies
+					</h2>
+					<div className='grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5'>
+						{loading ? (
+							<div>Loading...</div>
+						) : (
+							movies.map(movie => <MovieCard key={movie.id} movie={movie} />)
+						)}
+					</div>
+				</div>
+			</div>
+		</Guest>
 	)
 }
 
@@ -68,6 +86,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
 		}
 		return description
 	}
+
 	return (
 		<div className='mt-8'>
 			<Link href={`/movies/${movie.id}`}>

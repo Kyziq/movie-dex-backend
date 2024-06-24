@@ -1,10 +1,20 @@
-import { useState, PropsWithChildren, ReactNode } from 'react'
+import React, { useState, PropsWithChildren, ReactNode } from 'react'
 import ApplicationLogo from '@/Components/ApplicationLogo'
 import Dropdown from '@/Components/Dropdown'
 import NavLink from '@/Components/NavLink'
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink'
 import { Link } from '@inertiajs/react'
 import { User } from '@/types'
+import axios from 'axios'
+
+interface Movie {
+	id: number
+	title: string
+	description: string
+	release_date: string
+	image_url: string
+	genre?: string[]
+}
 
 export default function Authenticated({
 	user,
@@ -12,9 +22,29 @@ export default function Authenticated({
 	children,
 }: PropsWithChildren<{ user: User; header?: ReactNode }>) {
 	const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false)
+	const [searchQuery, setSearchQuery] = useState('')
+	const [searchResults, setSearchResults] = useState<Movie[]>([])
+
+	const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setSearchQuery(e.target.value)
+		if (e.target.value.length > 2) {
+			performSearch(e.target.value)
+		} else {
+			setSearchResults([])
+		}
+	}
+
+	const performSearch = async (query: string) => {
+		try {
+			const response = await axios.get(`/test-search?query=${encodeURIComponent(query)}`)
+			setSearchResults(response.data)
+		} catch (error) {
+			console.error('Failed to fetch search results:', error)
+		}
+	}
 
 	return (
-		<div className='min-h-screen bg-gray-100 bg-gray-950'>
+		<div className='min-h-screen bg-gray-100 dark:bg-gray-950'>
 			<nav className='border-b border-gray-100 bg-white dark:border-gray-700 dark:bg-red-800'>
 				<div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
 					<div className='flex h-16 justify-between'>
@@ -25,30 +55,47 @@ export default function Authenticated({
 								</Link>
 							</div>
 
-							<div className='hidden space-x-8 sm:-my-px sm:ms-10 sm:flex'>
+							<div className='hidden space-x-8 sm:-my-px sm:ml-10 sm:flex'>
 								<NavLink href={route('dashboard')} active={route().current('dashboard')}>
 									Movie
 								</NavLink>
 							</div>
 						</div>
 
-						<div className='flex flex-col items-center md:flex-row'>
-							<div className='relative mt-3 md:mt-0'>
+						<div className='flex items-center'>
+							<div className='relative'>
 								<input
 									type='text'
 									className='focus:shadow-outline w-64 rounded-full bg-slate-200 px-4 py-1 pl-8 text-sm focus:outline-none dark:border-gray-700'
 									placeholder='Search'
+									value={searchQuery}
+									onChange={handleSearchChange}
 								/>
 								<div className='absolute top-0'>
 									<svg className='ml-2 mt-2 w-4 fill-current text-gray-500' viewBox='0 0 24 24'>
 										<path d='M16.32 14.9l5.39 5.4a1 1 0 01-1.42 1.4l-5.38-5.38a8 8 0 111.41-1.41zM10 16a6 6 0 100-12 6 6 0 000 12z'></path>
 									</svg>
 								</div>
+								{searchResults.length > 0 && (
+									<div className='absolute z-10 mt-1 w-64 rounded-md bg-white shadow-lg dark:bg-gray-800'>
+										<ul>
+											{searchResults.map(movie => (
+												<li
+													key={movie.id}
+													className='border-b border-gray-200 p-2 dark:border-gray-700'>
+													<Link
+														href={route('movies.show', { movie: movie.id })}
+														className='block text-gray-700 dark:text-gray-200'>
+														{movie.title}
+													</Link>
+												</li>
+											))}
+										</ul>
+									</div>
+								)}
 							</div>
-						</div>
 
-						<div className='hidden sm:ms-6 sm:flex sm:items-center'>
-							<div className='relative ms-3'>
+							<div className='relative ml-3'>
 								<Dropdown>
 									<Dropdown.Trigger>
 										<span className='inline-flex rounded-md'>
@@ -56,9 +103,8 @@ export default function Authenticated({
 												type='button'
 												className='inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none dark:bg-gray-950 dark:text-gray-400 dark:hover:text-gray-300'>
 												{user.name}
-
 												<svg
-													className='-me-0.5 ms-2 h-4 w-4'
+													className='-mr-0.5 ml-2 h-4 w-4'
 													xmlns='http://www.w3.org/2000/svg'
 													viewBox='0 0 20 20'
 													fill='currentColor'>
@@ -82,7 +128,7 @@ export default function Authenticated({
 							</div>
 						</div>
 
-						<div className='-me-2 flex items-center sm:hidden'>
+						<div className='-mr-2 flex items-center sm:hidden'>
 							<button
 								onClick={() => setShowingNavigationDropdown(previousState => !previousState)}
 								className='inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none dark:text-gray-500 dark:hover:bg-gray-900 dark:hover:text-gray-400 dark:focus:bg-gray-900 dark:focus:text-gray-400'>
@@ -133,7 +179,7 @@ export default function Authenticated({
 			</nav>
 
 			{header && (
-				<header className='bg-white shadow dark:bg-gray-800'>
+				<header className='bg-white shadow dark:bg-gray-900'>
 					<div className='mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8'>{header}</div>
 				</header>
 			)}
